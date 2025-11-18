@@ -209,6 +209,39 @@
     pointer-events: none;
   }
 
+  /* Beautiful table styling for markdown tables in roadmap */
+  .prose table {
+    @apply w-full border-collapse rounded-lg overflow-hidden;
+  }
+
+  .prose thead {
+    @apply bg-muted/50;
+  }
+
+  .prose thead th {
+    @apply px-4 py-3 text-left text-sm font-semibold text-foreground border-b-2 border-border;
+  }
+
+  .prose tbody tr {
+    @apply border-b border-border hover-elevate transition-colors;
+  }
+
+  .prose tbody tr:last-child {
+    @apply border-b-0;
+  }
+
+  .prose tbody td {
+    @apply px-4 py-3 text-sm text-foreground;
+  }
+
+  .prose tbody tr:nth-child(odd) {
+    @apply bg-card/50;
+  }
+
+  .prose tbody tr:nth-child(even) {
+    @apply bg-background/50;
+  }
+
   /* .no-default-hover-elevate/no-default-active-elevate is an escape hatch so consumers of
    * buttons/badges can remove the automatic brightness adjustment on interactions
    * and program their own. */

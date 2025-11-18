@@ -5,6 +5,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { FileDown, FileText, CheckCircle2, Lightbulb, Calendar, Code, BookOpen, Target, Copy } from "lucide-react";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 interface RoadmapDisplayProps {
   content: string;
@@ -188,7 +189,7 @@ export function RoadmapDisplay({ content, isGenerating }: RoadmapDisplayProps) {
                 </AccordionTrigger>
                 <AccordionContent className="px-6 pb-6" data-testid={`content-section-${index}`}>
                   <div className="prose prose-sm max-w-none dark:prose-invert">
-                    <ReactMarkdown>{section.content}</ReactMarkdown>
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{section.content}</ReactMarkdown>
                   </div>
                 </AccordionContent>
               </AccordionItem>
@@ -199,7 +200,7 @@ export function RoadmapDisplay({ content, isGenerating }: RoadmapDisplayProps) {
         <Card data-testid="card-roadmap-full">
           <CardContent className="py-8">
             <div className="prose prose-sm max-w-none dark:prose-invert">
-              <ReactMarkdown>{content}</ReactMarkdown>
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
             </div>
           </CardContent>
         </Card>
