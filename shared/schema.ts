@@ -1,18 +1,19 @@
-import { sql } from "drizzle-orm";
-import { pgTable, text, varchar } from "drizzle-orm/pg-core";
-import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
-export const users = pgTable("users", {
-  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
-  username: text("username").notNull().unique(),
-  password: text("password").notNull(),
+// Roadmap generation request schema
+export const roadmapRequestSchema = z.object({
+  company: z.string().optional(),
+  role: z.string().min(1, "Role is required"),
+  sector: z.string().min(1, "Sector is required"),
+  salary: z.string().optional(),
+  timeframeMonths: z.number().min(1).max(60),
+  hoursPerWeek: z.number().min(1).max(168),
 });
 
-export const insertUserSchema = createInsertSchema(users).pick({
-  username: true,
-  password: true,
-});
+export type RoadmapRequest = z.infer<typeof roadmapRequestSchema>;
 
-export type InsertUser = z.infer<typeof insertUserSchema>;
-export type User = typeof users.$inferSelect;
+// Roadmap response structure
+export interface RoadmapResponse {
+  content: string;
+  timestamp: string;
+}
